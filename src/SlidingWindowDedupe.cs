@@ -13,7 +13,6 @@ public sealed class SlidingWindowXxHashDedupe : ISlidingWindowDedupe
 {
     private readonly SlidingWindowConcurrentSet<ulong> _set;
 
-    // Optional seed so you can rotate/partition if you want.
     private readonly long _seed;
 
     public SlidingWindowXxHashDedupe(TimeSpan window, TimeSpan rotationInterval, int capacityHint = 0, long seed = 0)
@@ -67,7 +66,7 @@ public sealed class SlidingWindowXxHashDedupe : ISlidingWindowDedupe
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryRemoveUtf8(ReadOnlySpan<byte> utf8) => _set.TryRemove(XxHash3Util.HashUtf8ToUInt64(utf8, _seed));
-    
+
     public void Dispose() => _set.Dispose();
 
     public ValueTask DisposeAsync() => _set.DisposeAsync();
