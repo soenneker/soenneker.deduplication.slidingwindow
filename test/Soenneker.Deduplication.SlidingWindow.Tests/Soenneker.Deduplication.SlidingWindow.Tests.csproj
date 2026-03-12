@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Deduplication.SlidingWindow.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Deduplication.SlidingWindow\Soenneker.Deduplication.SlidingWindow.csproj" />
     </ItemGroup>
 
     <ItemGroup>
