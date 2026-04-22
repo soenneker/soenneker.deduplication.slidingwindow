@@ -4,7 +4,6 @@ using Soenneker.Tests.Unit;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Soenneker.Deduplication.SlidingWindow.Tests;
 
@@ -15,7 +14,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
         return new SlidingWindowXxHashDedupe(window ?? TimeSpan.FromMinutes(1), rotationInterval ?? TimeSpan.FromSeconds(10), capacityHint, seed);
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeen_string_first_time_returns_true()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -24,7 +23,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeen_string_duplicate_returns_false()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -34,7 +33,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeen_string_null_throws()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -43,7 +42,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
            .Throw<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeen_span_first_time_returns_true()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -52,7 +51,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeen_span_duplicate_returns_false()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -62,7 +61,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeenUtf8_first_time_returns_true()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -72,7 +71,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void TryMarkSeenUtf8_duplicate_returns_false()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -83,7 +82,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void Same_content_via_string_and_utf8_is_deduplicated()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -96,7 +95,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void Contains_string_returns_true_after_TryMarkSeen()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -106,7 +105,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void Contains_string_returns_false_when_not_seen()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -115,7 +114,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void Contains_string_null_throws()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -124,7 +123,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
            .Throw<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void Contains_span_returns_true_after_TryMarkSeen()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -134,7 +133,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void ContainsUtf8_returns_true_after_TryMarkSeenUtf8()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -145,7 +144,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void TryRemove_string_returns_true_when_present()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -158,7 +157,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void TryRemove_string_returns_false_when_not_present()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -167,7 +166,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void TryRemove_string_null_throws()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -176,7 +175,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
            .Throw<ArgumentNullException>();
     }
 
-    [Fact]
+    [Test]
     public void TryRemove_span_removes_and_allow_re_add()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -189,7 +188,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void TryRemoveUtf8_removes_entry()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -203,7 +202,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeFalse();
     }
 
-    [Fact]
+    [Test]
     public void Count_increases_on_TryMarkSeen_new_and_decreases_on_TryRemove()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -226,7 +225,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .Be(0);
     }
 
-    [Fact]
+    [Test]
     public void Different_seed_produces_different_buckets()
     {
         using ISlidingWindowDedupe dedupe0 = CreateDedupe(seed: 0);
@@ -248,7 +247,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
                .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void Empty_span_hashes_consistently()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -263,7 +262,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void Empty_utf8_hashes_consistently()
     {
         using ISlidingWindowDedupe dedupe = CreateDedupe();
@@ -278,14 +277,14 @@ public sealed class SlidingWindowDedupeTests : UnitTest
               .BeTrue();
     }
 
-    [Fact]
+    [Test]
     public void Dispose_can_be_called()
     {
         ISlidingWindowDedupe dedupe = CreateDedupe();
         dedupe.Dispose();
     }
 
-    [Fact]
+    [Test]
     public async Task DisposeAsync_can_be_called()
     {
         ISlidingWindowDedupe dedupe = CreateDedupe();
