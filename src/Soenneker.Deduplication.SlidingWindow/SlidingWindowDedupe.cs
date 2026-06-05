@@ -67,7 +67,14 @@ public sealed class SlidingWindowXxHashDedupe : ISlidingWindowDedupe
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryRemoveUtf8(ReadOnlySpan<byte> utf8) => _set.TryRemove(XxHash3Util.HashUtf8ToUInt64(utf8, _seed));
 
+    /// <summary>
+    /// Releases resources used by the current instance.
+    /// </summary>
     public void Dispose() => _set.Dispose();
 
+    /// <summary>
+    /// Asynchronously releases resources used by the current instance.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public ValueTask DisposeAsync() => _set.DisposeAsync();
 }
