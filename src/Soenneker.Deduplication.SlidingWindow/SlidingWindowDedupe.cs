@@ -8,7 +8,7 @@ using Soenneker.Sets.Concurrent.SlidingWindow;
 
 namespace Soenneker.Deduplication.SlidingWindow;
 
-///<inheritdoc cref="ISlidingWindowDedupe"/>
+/// <inheritdoc cref="ISlidingWindowDedupe"/>
 public sealed class SlidingWindowXxHashDedupe : ISlidingWindowDedupe
 {
     private readonly SlidingWindowConcurrentSet<ulong> _set;
