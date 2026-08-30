@@ -16,7 +16,7 @@ namespace Soenneker.Deduplication.SlidingWindow.Abstract;
 /// </para>
 /// <list type="bullet">
 /// <item>
-/// <description>Idempotent request handling</description>
+/// <description>Best-effort suppression of recently repeated requests</description>
 /// </item>
 /// <item>
 /// <description>Lead or event ingestion deduplication</description>
