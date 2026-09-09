@@ -44,7 +44,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.91" />
+        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.92" />
         <PackageReference Include="Soenneker.Sets.Concurrent.SlidingWindow" Version="4.0.70" />
     </ItemGroup>
 </Project>
