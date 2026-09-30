@@ -285,7 +285,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
     }
 
     [Test]
-    public async Task DisposeAsync_can_be_called()
+    public async ValueTask DisposeAsync_can_be_called()
     {
         ISlidingWindowDedupe dedupe = CreateDedupe();
         await dedupe.DisposeAsync();
