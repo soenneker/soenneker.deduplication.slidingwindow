@@ -4,6 +4,7 @@ using Soenneker.Tests.Unit;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Soenneker.Deduplication.SlidingWindow.Tests;
 
@@ -285,7 +286,7 @@ public sealed class SlidingWindowDedupeTests : UnitTest
     }
 
     [Test]
-    public async ValueTask DisposeAsync_can_be_called()
+    public async ValueTask DisposeAsync_can_be_called(CancellationToken cancellationToken)
     {
         ISlidingWindowDedupe dedupe = CreateDedupe();
         await dedupe.DisposeAsync();
